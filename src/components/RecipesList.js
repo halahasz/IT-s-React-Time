@@ -1,32 +1,17 @@
-import React from 'react';
-import Recipe from './Recipe';
+import React, { Component } from "react";
+import Recipe from "./Recipe";
+import "./RecipesList.css";
 
-class RecipesList extends React.Component {
-
-    /** dążymy do tego, żeby jak najmniej logiki znajdowało się w metodzie render() 
-     * oraz żeby była ona jak najbardziej czytelna , dlatego wydzieliliśmy
-     * renderowanie pojedynczego przepisu do osobnej metody
-     */
-    renderList = () => {
-        return (
-            this.props.recipes.map((recipe) => {
-                return <Recipe 
-                    key={recipe.href} 
-                    imageUrl={recipe.thumbnail} 
-                    text={recipe.title} 
-                    url={recipe.href} 
-                    ingredients={recipe.ingredients}
-                 />
-            })
-        )
-    }
-
-    render() {
-        return (
-            <div className="recipes-list">
-                {this.renderList() /* potrzebujemy tutaj wyświetlić wynik działania metody renderList */}
-            </div>
-        )
-    }
+class RecipeList extends Component {
+  render() {
+    return (
+      <div className="recipeList">
+        {this.props.recipes.map(recipe => (
+          <Recipe key={recipe.href} {...recipe} />
+        ))}
+      </div>
+    );
+  }
 }
- export default RecipesList;
+
+export default RecipeList;

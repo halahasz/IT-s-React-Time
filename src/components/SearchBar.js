@@ -1,40 +1,57 @@
-import React from 'react';
-import './SearchBar.css';
+import React, { Component } from "react";
+import "./SearchBar.css";
 
-class SearchBar extends React.Component {
+class SearchBar extends Component {
+  state = {
+    title: "",
+    ingredients: ""
+  };
 
-    //chcemy móc korzystać z tekstu wpisanego w pole tekstowe, więc musimy trzymać jego wartość w stanie
-    state = {
-        pharse: ''
-    }
+  onTitleInputChange = event => {
+    this.setState({
+      title: event.target.value
+    });
+  };
+  onIngredientsInputChange = event => {
+    this.setState({
+      ingredients: event.target.value
+    });
+  };
 
-    onFormSubmit = (event) => {
-        event.preventDefault(); // musimy zatrzymać domyślne przetwarzanie, żeby nie przeładowała nam się strona
-        this.props.onFormSubmit(this.state.pharse); // wywołujemy metodę przekazaną w propsach; jako parametr podajemy wartość trzymaną w stanie 
-                                                    // dzięki temu przekazujemy stan komponnetu do komponentu wyżej
-    }
+  onFormSubmit = (e, title, ingredients) => {
+    e.preventDefault();
+    this.props.onFormSubmit(this.state.ingredients, this.state.title);
+    this.setState({
+      title: "",
+      ingredients: ""
+    });
+  };
 
-    onInputChange = (event) => {
-        this.setState({
-            pharse: event.target.value //zapisujemy zmiany z inputa w stanie, żeby mieć aktualną wartość
-        });
-    }
-
-    render() {
-        return (
-            <form className="search-bar"
-                onSubmit={this.onFormSubmit}
-            >
-                <label className="search-bar__label">{this.props.label}</label>
-                <input 
-                    type="text" 
-                    value={this.state.pharse} // ustawiamy value na wartość trzymaną w stanie
-                    className="search-bar__input"
-                    onChange={this.onInputChange} //podczas wpisywania zmiany są zczytywane i zapisywane w stanie komponentu
-                />
-                <div>Result word is: {this.state.pharse}</div>
-            </form>
-        )
-    }
+  render() {
+    return (
+      <form className="form" onSubmit={this.onFormSubmit}>
+        <label>Search {this.props.labels[0]}</label>
+        <input
+          className="form__input"
+          value={this.state.title}
+          onChange={this.onTitleInputChange}
+          placeholder="Search"
+          type="text"
+        />
+        <label>Search {this.props.labels[1]}</label>
+        <input
+          className="form__input"
+          value={this.state.ingredients}
+          onChange={this.onIngredientsInputChange}
+          placeholder="Search"
+          type="text"
+        />
+        <button className="form__button" type="submit">
+          Submit
+        </button>
+      </form>
+    );
+  }
 }
- export default SearchBar;
+
+export default SearchBar;
