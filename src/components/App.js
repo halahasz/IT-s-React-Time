@@ -7,6 +7,7 @@ import "./App.css";
 class App extends React.Component {
   state = {
     recipes: [],
+    savedRecipes: [],
     ingredients: "",
     title: "",
     numberOfPages: 1
@@ -67,6 +68,12 @@ class App extends React.Component {
     }
   };
 
+  onSaveRecipe = savedRecipe => {
+    this.setState(prevState => ({
+      savedRecipes: [...prevState["savedRecipes"], savedRecipe]
+    }));
+  };
+
   render() {
     return (
       <div className="app">
@@ -88,7 +95,10 @@ class App extends React.Component {
           </div>
         </header>
         <main>
-          <RecipeList recipes={this.state.recipes} />
+          <RecipeList
+            onSaveRecipe={this.onSaveRecipe}
+            recipes={this.state.recipes}
+          />
           <button
             className="form__button more"
             type="button"

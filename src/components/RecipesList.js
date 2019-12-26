@@ -7,7 +7,11 @@ class RecipeList extends Component {
     return (
       <div className="recipeList">
         {this.props.recipes.map(recipe => (
-          <Recipe key={recipe.href} {...recipe} />
+          <Recipe
+            key={recipe.href}
+            {...recipe}
+            onSaveRecipe={this.props.onSaveRecipe}
+          />
         ))}
       </div>
     );

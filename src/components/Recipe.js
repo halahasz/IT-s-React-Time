@@ -3,12 +3,23 @@ import "./Recipe.css";
 import icon from "../assets/tab-icon.png";
 
 class Recipe extends Component {
+  state = {
+    title: this.props.title,
+    href: this.props.href,
+    thumbnail: this.props.thumbnail,
+    ingredients: this.props.ingredients
+  };
+
+  saveRecipe = e => {
+    this.props.onSaveRecipe(this.state);
+    e.target.parentNode.className = "recipe__clicked";
+  };
   render() {
     const { title, href, thumbnail, ingredients } = this.props;
     return (
       <div className="recipe">
         <div className="recipe__content">
-          <div className="recipe__save">
+          <div className="recipe__save" onClick={this.saveRecipe}>
             <div
               className="recipe__save-icon"
               style={{ backgroundImage: "url(" + icon + ")" }}
