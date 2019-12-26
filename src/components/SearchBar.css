@@ -4,12 +4,13 @@
 }
 
 .form__input {
-  padding: 5px;
+  padding: 5px 15px;
+  font-weight: 700;
   border: none;
   border-bottom: 1px solid #cfd0d6;
   margin: 0 15px;
   font-size: 1.5rem;
-  color: #4b5055;
+  color: #e7b688;
 }
 
 .form__input:focus,
@@ -21,6 +22,7 @@
 .form__input::placeholder {
   color: #868e96;
   font-size: 1.3rem;
+  font-weight: normal;
 }
 
 .form__button {

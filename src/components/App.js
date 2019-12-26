@@ -16,6 +16,10 @@ class App extends React.Component {
     this.fetchRecipes();
   }
   fetchRecipes = async (ingredients, title) => {
+    document.querySelector(".more").style.display = "none";
+    this.setState({
+      recipes: []
+    });
     const response = await recipes.get("/", {
       params: {
         i: ingredients,
@@ -49,7 +53,10 @@ class App extends React.Component {
         recipes: [...this.state.recipes, ...response.data.results],
         numberOfPages
       });
-      if (this.state.recipes.length % 10 !== 0 || response.data.results === 0) {
+      if (
+        this.state.recipes.length % 10 !== 0 ||
+        response.data.results.length === 0
+      ) {
         document.querySelector(".more").style.display = "none";
       } else {
         document.querySelector(".more").style.display = "block";
