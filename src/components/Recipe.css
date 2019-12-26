@@ -85,6 +85,9 @@
   border-radius: 0 5px 0 0;
   cursor: pointer;
 }
+.recipe__clicked .recipe__save-icon {
+  background-color: #cf8b77;
+}
 .recipe__save:hover {
   background: rgba(85, 60, 37, 0);
 }

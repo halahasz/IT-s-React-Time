@@ -7,12 +7,18 @@ class Recipe extends Component {
     title: this.props.title,
     href: this.props.href,
     thumbnail: this.props.thumbnail,
-    ingredients: this.props.ingredients
+    ingredients: this.props.ingredients,
+    saved: true
   };
 
   saveRecipe = e => {
     this.props.onSaveRecipe(this.state);
-    e.target.parentNode.className = "recipe__clicked";
+    this.setState({
+      saved: !this.state.saved
+    });
+    this.state.saved
+      ? (e.target.parentNode.className = "recipe__clicked")
+      : (e.target.parentNode.className = "recipe__save");
   };
   render() {
     const { title, href, thumbnail, ingredients } = this.props;

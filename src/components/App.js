@@ -69,12 +69,21 @@ class App extends React.Component {
   };
 
   onSaveRecipe = savedRecipe => {
-    this.setState(prevState => ({
-      savedRecipes: [...prevState["savedRecipes"], savedRecipe]
-    }));
+    if (savedRecipe.saved) {
+      this.setState(prevState => ({
+        savedRecipes: [...prevState["savedRecipes"], savedRecipe]
+      }));
+    } else {
+      this.setState(prevState => ({
+        savedRecipes: [
+          ...prevState["savedRecipes"].filter(a => a.href !== savedRecipe.href)
+        ]
+      }));
+    }
   };
 
   render() {
+    console.log(this.state.savedRecipes);
     return (
       <div className="app">
         <header>
