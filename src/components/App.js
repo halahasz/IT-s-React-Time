@@ -5,6 +5,7 @@ import recipes from "../API/recipepuppy";
 import "./App.css";
 import icon from "../assets/tab-icon.png";
 import SavedRecipesModal from "./SavedRecipesModal";
+import axios from "axios";
 
 class App extends React.Component {
   state = {
@@ -25,12 +26,15 @@ class App extends React.Component {
     this.setState({
       recipes: []
     });
-    const response = await recipes.get("/", {
-      params: {
-        i: ingredients,
-        q: title
+    const response = await axios.get(
+      "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api",
+      {
+        params: {
+          i: ingredients,
+          q: title
+        }
       }
-    });
+    );
     console.log(response);
     this.setState({
       recipes: response.data.results,

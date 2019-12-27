@@ -1,5 +1,6 @@
 {
   "name": "workshop",
+  "homepage": "https://5e066b50c246d85cf9bddb2b--it-s-react-time.netlify.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +17,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://www.recipepuppy.com",
   "eslintConfig": {
     "extends": "react-app"
   },
