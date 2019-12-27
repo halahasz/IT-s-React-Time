@@ -105,6 +105,33 @@
   transition: color 0.35s, border 0.35s;
 }
 
+.recipe__remove {
+  height: 50px;
+  padding: 10px;
+  position: absolute;
+  z-index: 100000;
+  top: 0px;
+  width: 50px;
+  right: 0px;
+  cursor: pointer;
+}
+.recipe__remove:hover .recipe__remove-icon {
+  background-color: #b36953;
+}
+
+.recipe__remove-icon {
+  transition: background-color 0.3s ease-in-out;
+  width: 30px;
+  height: 30px;
+  background-color: #cf8b77;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: #fff;
+  text-align: center;
+  font-size: 1.9rem;
+  border-radius: 50%;
+}
+
 @keyframes appear {
   0% {
     opacity: 0;

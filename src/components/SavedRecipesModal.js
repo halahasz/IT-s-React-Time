@@ -2,7 +2,12 @@ import React from "react";
 import RecipesList from "./RecipesList";
 import "./SavedRecipesModal.css";
 
-const SavedRecipesModal = ({ closeModalFn, recipes, isModalOpen }) => {
+const SavedRecipesModal = ({
+  closeModalFn,
+  recipes,
+  isModalOpen,
+  onRemoveRecipe
+}) => {
   return (
     <div
       className={isModalOpen ? "modal-container active" : "modal-container out"}
@@ -15,7 +20,11 @@ const SavedRecipesModal = ({ closeModalFn, recipes, isModalOpen }) => {
           ) : (
             <h2 className="modal-h2">Recipes saved:</h2>
           )}
-          <RecipesList recipes={recipes} />
+          <RecipesList
+            recipes={recipes}
+            isModalOpen={isModalOpen}
+            onRemoveRecipe={onRemoveRecipe}
+          />
         </div>
       </div>
     </div>

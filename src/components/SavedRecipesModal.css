@@ -34,6 +34,7 @@
   vertical-align: middle;
 }
 .modal-container .modal {
+  transition: all 0.5s ease-in-out;
   max-width: 650px;
   overflow-y: auto;
   max-height: 80vh;

@@ -11,6 +11,8 @@ class RecipeList extends Component {
             key={recipe.href}
             {...recipe}
             onSaveRecipe={this.props.onSaveRecipe}
+            isModalOpen={this.props.isModalOpen}
+            onRemoveRecipe={this.props.onRemoveRecipe}
           />
         ))}
       </div>

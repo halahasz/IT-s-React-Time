@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Recipe.css";
-import icon from "../assets/tab-icon.png";
+import saveIcon from "../assets/tab-icon.png";
 
 class Recipe extends Component {
   state = {
@@ -13,18 +13,32 @@ class Recipe extends Component {
   saveRecipe = e => {
     this.props.onSaveRecipe(this.state);
   };
+  removeRecipe = e => {
+    e.stopPropagation();
+    this.props.onRemoveRecipe(this.state);
+    console.log(this.state);
+  };
   render() {
-    const { title, href, thumbnail, ingredients } = this.props;
+    const { title, href, thumbnail, ingredients, isModalOpen } = this.props;
     return (
       <div className="recipe">
         <div className="recipe__content">
-          <div className="recipe__save" onClick={this.saveRecipe}>
-            <div
-              className="recipe__save-icon"
-              style={{ backgroundImage: "url(" + icon + ")" }}
-              title="Save recipe"
-            ></div>
-          </div>
+          {!isModalOpen ? (
+            <div className="recipe__save" onClick={this.saveRecipe}>
+              <div
+                className="recipe__save-icon"
+                style={{ backgroundImage: "url(" + saveIcon + ")" }}
+                title="Save recipe"
+              ></div>
+            </div>
+          ) : (
+            <div className="recipe__remove" onClick={this.removeRecipe}>
+              <div className="recipe__remove-icon" title="Remove recipe">
+                x
+              </div>
+            </div>
+          )}
+
           <a
             href={href}
             target="_blank"

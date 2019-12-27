@@ -34,6 +34,7 @@ header {
   right: 0;
   top: 0;
   z-index: 500;
+  margin-left: calc(100vw - 100%);
 }
 
 .header-container {

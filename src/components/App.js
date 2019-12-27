@@ -80,14 +80,19 @@ class App extends React.Component {
       ]
     }));
   };
+  onRemoveRecipe = removedRecipe => {
+    this.setState(prevState => ({
+      savedRecipes: [
+        ...prevState["savedRecipes"].filter(a => a.href !== removedRecipe.href)
+      ]
+    }));
+  };
 
   openModal = () => {
     this.setState({
       isModalOpen: true
     });
     document.body.style.overflow = "hidden";
-    // document.querySelector(".modal-container").className =
-    //   "modal-container active";
   };
 
   closeModal = () => {
@@ -147,6 +152,7 @@ class App extends React.Component {
           </button>
         </main>
         <SavedRecipesModal
+          onRemoveRecipe={this.onRemoveRecipe}
           isModalOpen={isModalOpen}
           recipes={this.state.savedRecipes}
           closeModalFn={this.closeModal}
