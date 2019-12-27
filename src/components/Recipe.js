@@ -7,18 +7,11 @@ class Recipe extends Component {
     title: this.props.title,
     href: this.props.href,
     thumbnail: this.props.thumbnail,
-    ingredients: this.props.ingredients,
-    saved: true
+    ingredients: this.props.ingredients
   };
 
   saveRecipe = e => {
     this.props.onSaveRecipe(this.state);
-    this.setState({
-      saved: !this.state.saved
-    });
-    this.state.saved
-      ? (e.target.parentNode.className = "recipe__clicked")
-      : (e.target.parentNode.className = "recipe__save");
   };
   render() {
     const { title, href, thumbnail, ingredients } = this.props;
@@ -32,7 +25,12 @@ class Recipe extends Component {
               title="Save recipe"
             ></div>
           </div>
-          <a href={href} className="recipe__link">
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="recipe__link"
+          >
             {thumbnail ? (
               <div
                 className="recipe__img"

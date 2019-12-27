@@ -4,6 +4,11 @@
   text-decoration: none;
   animation: appear 1s ease;
 }
+@media screen and (max-width: 768px) {
+  .recipe {
+    width: 100%;
+  }
+}
 .recipe:hover .recipe__content {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.4s ease-in-out;
@@ -28,7 +33,7 @@
   display: flex;
 }
 .recipe__link:hover .recipe__title {
-  color: #c4745c;
+  color: #c9a039;
 }
 .recipe__img {
   border-radius: 50%;
@@ -73,20 +78,6 @@
   transition: transform 0.4s ease-in-out, background 0.2s ease-in-out;
   border-radius: 0 5px 0 0;
   cursor: pointer;
-}
-.recipe__clicked {
-  height: 50px;
-  padding: 10px;
-  position: absolute;
-  z-index: 100;
-  top: 0px;
-  width: 50px;
-  right: 0px;
-  border-radius: 0 5px 0 0;
-  cursor: pointer;
-}
-.recipe__clicked .recipe__save-icon {
-  background-color: #cf8b77;
 }
 .recipe__save:hover {
   background: rgba(85, 60, 37, 0);

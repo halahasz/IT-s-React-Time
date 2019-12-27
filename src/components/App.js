@@ -3,6 +3,8 @@ import RecipeList from "./RecipesList";
 import SearchBar from "./SearchBar";
 import recipes from "../API/recipepuppy";
 import "./App.css";
+import icon from "../assets/tab-icon.png";
+import SavedRecipesModal from "./SavedRecipesModal";
 
 class App extends React.Component {
   state = {
@@ -10,7 +12,8 @@ class App extends React.Component {
     savedRecipes: [],
     ingredients: "",
     title: "",
-    numberOfPages: 1
+    numberOfPages: 1,
+    isModalOpen: false
   };
 
   componentDidMount() {
@@ -69,29 +72,51 @@ class App extends React.Component {
   };
 
   onSaveRecipe = savedRecipe => {
-    if (savedRecipe.saved) {
-      this.setState(prevState => ({
-        savedRecipes: [...prevState["savedRecipes"], savedRecipe]
-      }));
-    } else {
-      this.setState(prevState => ({
-        savedRecipes: [
-          ...prevState["savedRecipes"].filter(a => a.href !== savedRecipe.href)
-        ]
-      }));
-    }
+    this.setState(prevState => ({
+      savedRecipes: [
+        ...prevState["savedRecipes"].filter(a => a.href !== savedRecipe.href),
+        savedRecipe
+      ]
+    }));
+  };
+
+  openModal = () => {
+    this.setState({
+      isModalOpen: true
+    });
+    document.body.style.overflow = "hidden";
+  };
+
+  closeModal = () => {
+    this.setState({
+      isModalOpen: false
+    });
+    document.body.style.overflow = "auto";
   };
 
   render() {
+    const { isModalOpen } = this.state;
     console.log(this.state.savedRecipes);
     return (
       <div className="app">
         <header>
           <div className="header-container">
-            <SearchBar
-              labels={["titles:", "ingredients:"]}
-              onFormSubmit={this.fetchRecipes}
-            />
+            <div className="search-bar">
+              <SearchBar
+                labels={["titles:", "ingredients:"]}
+                onFormSubmit={this.fetchRecipes}
+              />
+              <div className="recipe__save" onClick={this.openModal}>
+                <div
+                  className="recipe__save-icon"
+                  style={{ backgroundImage: "url(" + icon + ")" }}
+                  title="Show saved recipes"
+                ></div>
+                <div className="recipe__save-number">
+                  {this.state.savedRecipes.length}
+                </div>
+              </div>
+            </div>
             <div className="results">
               <p>
                 Results for title: <span>{this.state.title}</span> ingredients:
@@ -116,6 +141,13 @@ class App extends React.Component {
             See more
           </button>
         </main>
+        {isModalOpen && (
+          <SavedRecipesModal
+            isModalOpen={isModalOpen}
+            recipes={this.state.savedRecipes}
+            closeModalFn={this.closeModal}
+          />
+        )}
       </div>
     );
   }

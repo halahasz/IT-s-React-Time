@@ -21,6 +21,9 @@ body {
   font-family: "Open Sans", sans-serif;
   background-color: #f1f2f7;
 }
+body.modal-active {
+  overflow: hidden;
+}
 
 header {
   background-color: #fff;
@@ -29,7 +32,7 @@ header {
   left: 0;
   right: 0;
   top: 0;
-  z-index: 1000;
+  z-index: 500;
 }
 
 .header-container {
@@ -44,7 +47,7 @@ header {
 }
 
 .results span {
-  color: #00c292;
+  color: #df1335;
   margin: 0 20px;
   font-size: 1.6rem;
 }
@@ -61,4 +64,31 @@ main {
 }
 .more {
   display: none;
+}
+.search-bar {
+  position: relative;
+}
+.search-bar .recipe__save {
+  right: 10px;
+  background: transparent;
+}
+.search-bar .recipe__save .recipe__save-icon {
+  background-color: #a1a199;
+  transition: all 0.3s ease-in-out;
+}
+.search-bar .recipe__save .recipe__save-number {
+  position: absolute;
+  color: #fff;
+  font-size: 1.2rem;
+  background-color: #ecd211;
+  height: 20px;
+  border-radius: 10px;
+  padding-top: 1px;
+  width: 20px;
+  text-align: center;
+  top: 5px;
+  right: 0;
+}
+.search-bar .recipe__save:hover .recipe__save-icon {
+  background-color: #d6d0bf;
 }
