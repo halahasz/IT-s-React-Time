@@ -46,6 +46,11 @@
   position: relative;
   background-color: #f1f2f7;
 }
+@media screen and (max-width: 450px) {
+  .modal-container .modal {
+    padding: 0;
+  }
+}
 .modal .recipe {
   width: 100%;
   animation: none;
@@ -53,6 +58,8 @@
 .modal-h2 {
   text-align: center;
   padding: 15px;
+  margin: 0 auto;
+  max-width: 320px;
 }
 @keyframes fadeOut {
   0% {

@@ -1,5 +1,5 @@
 .recipeList {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 15px;
+  padding: 0 15px 15px;
 }

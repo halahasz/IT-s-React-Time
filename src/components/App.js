@@ -111,34 +111,39 @@ class App extends React.Component {
       <div className="app">
         <header>
           <div className="header-container">
-            <div className="search-bar">
-              <SearchBar
-                labels={["titles:", "ingredients:"]}
-                onFormSubmit={this.fetchRecipes}
-              />
-              <div className="recipe__save" onClick={this.openModal}>
-                <div
-                  className="recipe__save-icon"
-                  style={{ backgroundImage: "url(" + icon + ")" }}
-                  title="Show saved recipes"
-                ></div>
-                <div className="recipe__save-number">
-                  {this.state.savedRecipes.length}
+            <div className="search-bar-container">
+              <div className="search-bar">
+                <SearchBar
+                  labels={["titles:", "ingredients:"]}
+                  onFormSubmit={this.fetchRecipes}
+                />
+                <div className="recipe__save" onClick={this.openModal}>
+                  <div
+                    className="recipe__save-icon"
+                    style={{ backgroundImage: "url(" + icon + ")" }}
+                    title="Show saved recipes"
+                  ></div>
+                  <div className="recipe__save-number">
+                    {this.state.savedRecipes.length}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="results">
-              <p>
-                Results for title: <span>{this.state.title}</span> ingredients:
-                <span>{this.state.ingredients}</span>
-              </p>
-              <p className="results__found">
-                Found {this.state.recipes.length} recipes
-              </p>
             </div>
           </div>
         </header>
         <main>
+          <div className="results">
+            <p>
+              Results for title: <span>{this.state.title}</span>
+            </p>
+            <p>
+              ingredients:
+              <span>{this.state.ingredients}</span>
+            </p>
+            <p className="results__found">
+              Found <span> {this.state.recipes.length}</span> recipes
+            </p>
+          </div>
           <RecipeList
             onSaveRecipe={this.onSaveRecipe}
             recipes={this.state.recipes}
