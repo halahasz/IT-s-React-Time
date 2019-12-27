@@ -10,7 +10,7 @@
   }
 }
 .recipe:hover .recipe__content {
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.4s ease-in-out;
 }
 .recipe__content {
@@ -40,7 +40,6 @@
   height: 80px;
   width: 80px;
   flex-shrink: 0;
-  align-self: center;
   background-size: cover;
   background-position: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);

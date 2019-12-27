@@ -5,11 +5,16 @@ import "./SavedRecipesModal.css";
 const SavedRecipesModal = ({ closeModalFn, recipes, isModalOpen }) => {
   return (
     <div
-      className={isModalOpen ? "modal-container active" : "modal-container"}
+      className={isModalOpen ? "modal-container active" : "modal-container out"}
       onClick={closeModalFn}
     >
       <div className="modal-background">
         <div className="modal">
+          {recipes.length === 0 ? (
+            <h2 className="modal-h2">No recipes saved, please add some</h2>
+          ) : (
+            <h2 className="modal-h2">Recipes saved:</h2>
+          )}
           <RecipesList recipes={recipes} />
         </div>
       </div>

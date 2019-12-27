@@ -18,6 +18,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchRecipes();
+    document.querySelector(".modal-container").className = "modal-container";
   }
   fetchRecipes = async (ingredients, title) => {
     document.querySelector(".more").style.display = "none";
@@ -85,13 +86,17 @@ class App extends React.Component {
       isModalOpen: true
     });
     document.body.style.overflow = "hidden";
+    // document.querySelector(".modal-container").className =
+    //   "modal-container active";
   };
 
   closeModal = () => {
+    document.body.style.overflow = "auto";
+    document.querySelector(".modal-container").className =
+      "modal-container out";
     this.setState({
       isModalOpen: false
     });
-    document.body.style.overflow = "auto";
   };
 
   render() {
@@ -141,13 +146,11 @@ class App extends React.Component {
             See more
           </button>
         </main>
-        {isModalOpen && (
-          <SavedRecipesModal
-            isModalOpen={isModalOpen}
-            recipes={this.state.savedRecipes}
-            closeModalFn={this.closeModal}
-          />
-        )}
+        <SavedRecipesModal
+          isModalOpen={isModalOpen}
+          recipes={this.state.savedRecipes}
+          closeModalFn={this.closeModal}
+        />
       </div>
     );
   }
