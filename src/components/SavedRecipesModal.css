@@ -29,6 +29,7 @@
 }
 .modal-background {
   display: table-cell;
+  height: 101vh;
   background: rgba(0, 0, 0, 0.8);
   text-align: center;
   vertical-align: middle;
@@ -54,6 +55,9 @@
 .modal .recipe {
   width: 100%;
   animation: none;
+}
+.modal .recipeList {
+  margin-top: 10px;
 }
 .modal-h2 {
   text-align: center;

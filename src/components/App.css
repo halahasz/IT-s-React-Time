@@ -57,7 +57,14 @@ header {
   align-items: center;
   background-color: #fff;
   margin-bottom: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 20px -10px rgba(0, 0, 0, 0.4);
+}
+@media screen and (min-width: 1200px) {
+  .results {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+  }
 }
 
 .results span {

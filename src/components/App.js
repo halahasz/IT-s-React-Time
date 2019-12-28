@@ -6,6 +6,7 @@ import "./App.css";
 import icon from "../assets/tab-icon.png";
 import SavedRecipesModal from "./SavedRecipesModal";
 import axios from "axios";
+import LoadingSpinner from "./LoadingSpinner";
 
 class App extends React.Component {
   state = {
@@ -24,23 +25,28 @@ class App extends React.Component {
   fetchRecipes = async (ingredients, title) => {
     document.querySelector(".more").style.display = "none";
     this.setState({
-      recipes: []
+      recipes: [],
+      loading: true
     });
-    const response = await axios.get(
-      "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api",
-      {
-        params: {
-          i: ingredients,
-          q: title
+    await axios
+      .get(
+        "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api",
+        {
+          params: {
+            i: ingredients,
+            q: title
+          }
         }
-      }
-    );
-    console.log(response);
-    this.setState({
-      recipes: response.data.results,
-      ingredients,
-      title
-    });
+      )
+      .then(response =>
+        this.setState({
+          loading: false,
+          recipes: response.data.results,
+          ingredients,
+          title
+        })
+      );
+
     if (this.state.recipes.length < 10) {
       document.querySelector(".more").style.display = "none";
     } else {
@@ -50,15 +56,20 @@ class App extends React.Component {
 
   fetchMoreRecipes = async numberOfPages => {
     numberOfPages = this.state.numberOfPages + 1;
+    this.setState({ loading: true });
     try {
-      const response = await recipes.get("/", {
-        params: {
-          i: this.state.ingredients,
-          q: this.state.title,
-          p: numberOfPages
+      const response = await axios.get(
+        "https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api",
+        {
+          params: {
+            i: this.state.ingredients,
+            q: this.state.title,
+            p: numberOfPages
+          }
         }
-      });
+      );
       this.setState({
+        loading: false,
         recipes: [...this.state.recipes, ...response.data.results],
         numberOfPages
       });
@@ -109,7 +120,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { isModalOpen } = this.state;
+    const { isModalOpen, loading } = this.state;
     console.log(this.state.savedRecipes);
     return (
       <div className="app">
@@ -148,17 +159,21 @@ class App extends React.Component {
               Found <span> {this.state.recipes.length}</span> recipes
             </p>
           </div>
+
           <RecipeList
             onSaveRecipe={this.onSaveRecipe}
             recipes={this.state.recipes}
           />
-          <button
-            className="form__button more"
-            type="button"
-            onClick={this.fetchMoreRecipes}
-          >
-            See more
-          </button>
+          {loading && <LoadingSpinner />}
+          {!loading && (
+            <button
+              className="form__button more"
+              type="button"
+              onClick={this.fetchMoreRecipes}
+            >
+              See more
+            </button>
+          )}
         </main>
         <SavedRecipesModal
           onRemoveRecipe={this.onRemoveRecipe}
